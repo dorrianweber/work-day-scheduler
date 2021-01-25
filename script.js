@@ -7,9 +7,7 @@ var timeblocks = ["9 am", "10 am", "11 am", "12 pm", "1 pm", "2 pm", "3 pm", "4 
 
 for (var i = 0; i < timeblocks.length; i++) {
     var eventText = localStorage.getItem(timeblocks[i]);
-
-    // console.log(timeblocks[i]);
-    // console.log(moment().format("HH:MM a"));
+    var currentTime24 = parseInt(moment().format("k"));
 
     if (eventText !== null) {
         var idLocator = timeblocks[i].split(" ")[0];
@@ -25,10 +23,17 @@ for (var i = 0; i < timeblocks.length; i++) {
     else {
         timestamp = parseInt(timeblocks[i].split(" ")[0]);
     }
-    console.log(timestamp);
-    // console.log(parseInt(timeblocks[i].split(" ")[0]))
-    // console.log(currentTime);
-    // console.log(moment(currentTime).isAfter(idLocator + ":00"));
+
+    // Is the time that the current block represents chronologically later than the current time?
+    console.log(moment(timestamp).isAfter(currentTime24));
+
+    if (moment(timestamp).isAfter(currentTime24)){
+        $("#" + timeblocks[i].split(" ")[0]).addClass("future");
+    }
+
+    else {
+        $("#" + timeblocks[i].split(" ")[0]).addClass("past");
+    }
 }
 
 $("#currentDay").text(now);
