@@ -31,6 +31,10 @@ for (var i = 0; i < timeblocks.length; i++) {
         $("#" + timeblocks[i].split(" ")[0]).addClass("future");
     }
 
+    else if (moment(timestamp).isSame(currentTime24)) {
+        $("#" + timeblocks[i].split(" ")[0]).addClass("present");
+    }
+
     else {
         $("#" + timeblocks[i].split(" ")[0]).addClass("past");
     }
